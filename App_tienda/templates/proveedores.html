@@ -1,0 +1,67 @@
+<!--Extends nos va a peritir de traer otro archivo de html-->
+{% extends 'plantilla.html' %}
+
+{% block content %}
+
+{% if messages %}
+{%for message in messages %}
+<div class="alert alert-success">{{ message }}</div>
+{%endfor%}
+{% endif %}
+
+<h2 class="text-center">Proveedores</h2>
+
+<form class="register1-form" method="post" action="proveedores/guardar">{% csrf_token %}
+    <div class="titulo">
+        <h1>Formulario de registro de Proveedores</h1>
+    </div>
+    
+    <div class="produc-form">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" placeholder="Reginald" required>
+        <label for="text">Apellido</label>
+        <input type="text" name="apellido"  placeholder="Ej:Louis" required>
+        <label for="direccion">Direccion</label>
+        <input type="text" name="direccion"  placeholder="Ej:123,Santa Elvira" required>
+        <label for="direccion">Telefono</label>
+        <input type="text" name="telefono"  placeholder="Ej: 569 74673512" required>
+        <button type="submit" class="btn-agregar">Guardar</button>
+    </div>
+</form>
+
+<table class="container mt-5">
+    <tr class="color">
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Direccion</th>
+        <th>Telefono</th>
+        <th colspan="2"></th>
+    </tr>
+    {% for proveedor in clave2 %}
+    <tr> <!--Mostrar el valor-->
+        <td>{{proveedor.nombre}}</td>
+        <td>{{proveedor.apellido}}</td>
+        <td>{{proveedor.direccion}}</td>
+        <td>{{proveedor.telefono}}</td>
+
+        <td>
+            <form action="{% url 'eliminar' proveedor.id %}" method="post">
+                {%csrf_token%}
+                <button class="btn btn-danger">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </form>
+        </td>
+        <td>
+            <form action="{% url 'detalle2' proveedor.id %}" method="post">
+                {%csrf_token%}
+                <button class="btn btn-warning">
+                    <i class="fa fa-edit"></i>
+                </button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

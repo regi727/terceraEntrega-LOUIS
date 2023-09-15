@@ -1,0 +1,29 @@
+<!--Extends nos va a peritir de traer otro archivo de html-->
+{% extends 'plantilla.html' %}
+
+{% block content %}
+
+<h2 class="text-center">Productos</h2>
+
+<form class="register-form" method="post" action="{% url 'editar' %}">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{ producto.id}}">
+    
+    <div class="titulo">
+        <h1>Actualizar productos</h1>
+    </div>
+    <div class="produc-form">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" placeholder="Lenovo" required value="{{ producto.nombre}}">
+        <label for="text">Precio</label>
+        <input type="number" name="precio" min="1" placeholder="Ej:1200" required value="{{ producto.precio}}">
+
+        <label for="direccion">Descripción</label>
+        <textarea name="descripcion" id="" cols="2" rows="2">
+            {{producto.descripcion}}
+        </textarea>
+        <button type="submit" class="btn-agregar">Editar</button>
+    </div>
+</form>
+
+{% endblock %}

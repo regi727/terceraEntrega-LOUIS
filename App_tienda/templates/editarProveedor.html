@@ -1,0 +1,30 @@
+<!--Extends nos va a peritir de traer otro archivo de html-->
+{% extends 'plantilla.html' %}
+
+{% block content %}
+
+
+<h2 class="text-center">Proveedores</h2>
+
+<form class="register1-form" method="post" action="{% url 'editar2' %}">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{ proveedor.id}}">
+
+    <div class="titulo">
+        <h1>Actualizar proveedor</h1>
+    </div>
+    <div class="produc-form">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre"  required value="{{ proveedor.nombre}}">
+        <label for="text">Apellido</label>
+        <input type="text" name="apellido"  required value="{{ proveedor.apellido}}">
+        <label for="direccion">Direccion</label>
+        <input type="text" name="direccion"  required value="{{ proveedor.direccion}}">
+        <label for="direccion">Telefono</label>
+        <input type="text" name="telefono"  required value="{{ proveedor.telefono}}">
+        <button type="submit" class="btn-agregar">Editar</button>
+    </div>
+</form>
+
+
+{% endblock %}

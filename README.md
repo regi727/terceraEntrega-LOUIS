@@ -1,0 +1,1 @@
+Esta App tiene un formulario para agregar producto para cada modelo,al ingresar un producto se guarda automaticamente,tambien se puede eliminar un producto ya ingresado en el modelo.Al dar un clic de cada menu se muestra todo los producto guardados en la base de datos,pero lo primero tienes que ingresar un producto,para que se guarde.

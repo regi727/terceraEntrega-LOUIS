@@ -1,0 +1,65 @@
+<!--Extends nos va a peritir de traer otro archivo de html-->
+{% extends 'plantilla.html' %}
+
+
+{% block content %}
+
+{% if messages %}
+{%for message in messages %}
+<div class="alert alert-success">{{ message }}</div>
+{%endfor%}
+{% endif %}
+<h2 class="text-center">Productos</h2>
+
+
+<form class="register-form" method="post" action="productos/agregar">{% csrf_token %}
+    <div class="titulo">
+        <h1>Formulario de registro de productos</h1>
+    </div>
+    <div class="produc-form">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" placeholder="Lenovo" required>
+        <label for="text">Precio</label>
+        <input type="number" name="precio" min="1" placeholder="Ej:1200" required>
+
+        <label for="direccion">Descripción</label>
+        <textarea name="descripcion" id="" cols="2" rows="2" placeholder="Ej:Lenovo con 8 GB de ram."></textarea>
+        <button type="submit" class="btn-agregar">Agregar</button>
+    </div>
+</form>
+
+
+<table class="container mt-5">
+    <tr class="color">
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Descripción</th>
+        <th colspan="2"></th>
+    </tr>
+    {% for producto in clave1 %}
+    <tr> <!--Mostrar el valor-->
+        <td>{{producto.nombre}}</td>
+        <td>{{producto.precio}}</td>
+        <td>{{producto.descripcion}}</td>
+        <td>
+            <form action="{% url 'borrar' producto.id %}" method="post">
+                {%csrf_token%}
+                <button class="btn btn-danger" onclick="return confirm('seguro quieres eliminar ese producto?')">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </form>
+        </td>
+
+        <td>
+            <form action="{% url 'detalle' producto.id %}" method="post">
+                {%csrf_token%}
+                <button class="btn btn-warning">
+                    <i class="fa fa-edit"></i>
+                </button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
